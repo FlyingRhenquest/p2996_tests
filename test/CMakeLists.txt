@@ -10,6 +10,7 @@ find_package(GTest REQUIRED)
 include(GoogleTest)
 
 set(TEST_SRC
+  ${CMAKE_CURRENT_SOURCE_DIR}/Annotations.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/EnumToString.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/PrivateMemberReflection.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/OperatorRefTests.cpp
@@ -19,9 +20,17 @@ add_executable(test
   ${TEST_SRC}
 )
 
+
+# Turning this on currently fails with an internal compiler error
 set(COMPILE_DEF_LIST)
 if (BUILD_REF_MEMBERS)
   list(APPEND COMPILE_DEF_LIST "BUILD_REF_MEMBERS")
+endif()
+
+# Turning this on currently fails with a "reflect constant failed"
+# exception from the compiler
+if (BUILD_CHARSTAR_ANNOTATION)
+  list(APPEND COMPILE_DEF_LIST "BUILD_CHARSTAR_ANNOTATION")
 endif()
 
 target_compile_definitions(test PUBLIC "${COMPILE_DEF_LIST}")
