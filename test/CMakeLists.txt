@@ -30,12 +30,6 @@ if (BUILD_REF_MEMBERS)
   list(APPEND COMPILE_DEF_LIST "BUILD_REF_MEMBERS")
 endif()
 
-# Turning this on currently fails with a "reflect constant failed"
-# exception from the compiler
-if (BUILD_CHARSTAR_ANNOTATION)
-  list(APPEND COMPILE_DEF_LIST "BUILD_CHARSTAR_ANNOTATION")
-endif()
-
 target_compile_definitions(test PUBLIC "${COMPILE_DEF_LIST}")
 
 target_link_libraries(test PUBLIC
