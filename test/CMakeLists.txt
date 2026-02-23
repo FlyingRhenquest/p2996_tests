@@ -20,6 +20,9 @@ add_executable(test
   ${TEST_SRC}
 )
 
+add_executable(standalone
+  ${CMAKE_CURRENT_SOURCE_DIR}/SimpleStringAnnotation.cpp
+)
 
 # Turning this on currently fails with an internal compiler error
 set(COMPILE_DEF_LIST)
@@ -40,3 +43,4 @@ target_link_libraries(test PUBLIC
   GTest::Main
 )
 
+target_compile_options(standalone PRIVATE -Wall -Wextra -save-temps -fno-strict-aliasing -fwrapv -fno-aggressive-loop-optimizations )
